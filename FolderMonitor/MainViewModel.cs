@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FolderMonitor
 {
@@ -20,9 +16,9 @@ namespace FolderMonitor
         public ObservableCollection<Folder> Folders { get; set; }
     }
 
-    public class Folder: INotifyPropertyChanged
+    public class Folder : INotifyPropertyChanged
     {
-        private FileSystemWatcher _watcher;
+        private readonly FileSystemWatcher _watcher;
 
         public Folder(string name, string path, ErrorState errorState)
         {
@@ -32,7 +28,7 @@ namespace FolderMonitor
 
             Contents.Clear();
             System.IO.Directory.GetFiles(Path).ToList().ForEach(x => Contents.Add(System.IO.Path.GetFileName(x)));
-            _watcher = new System.IO.FileSystemWatcher(Path);
+            _watcher = new FileSystemWatcher(Path);
             _watcher.Created += (sender, e) =>
             {
                 App.Current.Dispatcher.Invoke(delegate
