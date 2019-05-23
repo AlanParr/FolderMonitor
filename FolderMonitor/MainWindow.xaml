@@ -1,0 +1,56 @@
+﻿<Window x:Class="FolderMonitor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FolderMonitor"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="1000">
+
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <TabControl ItemsSource="{Binding Path=Profiles}" Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch" Margin="5">
+
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <Run Text="{Binding ProfileName}"/>
+                        <Run>(</Run><Run Text="{Binding Path=Folders.Count, Mode=OneWay}"/><Run>)</Run>
+                    </TextBlock>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <ItemsControl ItemsSource="{Binding Path=Folders}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+
+                                <DockPanel Margin="5">
+                                    <TextBlock Text="{Binding Path=Name}" DockPanel.Dock="Top"/>
+                                    <TextBlock Text="{Binding Path=Path}" DockPanel.Dock="Top"/>
+                                    <TextBlock DockPanel.Dock="Top">
+                                        <Run Text="File Count"/>
+                                        <Run>(</Run><Run Text="{Binding Path=Contents.Count, Mode=OneWay}"/><Run>)</Run>
+                                    </TextBlock>
+                                    <ListView ItemsSource="{Binding Path=Contents}" VerticalAlignment="Stretch"/>
+                                </DockPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid IsItemsHost="True"></UniformGrid>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </TabControl>
+    </Grid>
+</Window>
