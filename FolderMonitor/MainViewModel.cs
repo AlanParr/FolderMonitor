@@ -24,12 +24,11 @@ namespace FolderMonitor
     {
         private FileSystemWatcher _watcher;
 
-        public Folder(string name, string path, ErrorState errorState, int pollInterval)
+        public Folder(string name, string path, ErrorState errorState)
         {
             Name = name;
             Path = path;
             ErrorState = errorState;
-            PollInterval = pollInterval;
 
             Contents.Clear();
             System.IO.Directory.GetFiles(Path).ToList().ForEach(x => Contents.Add(System.IO.Path.GetFileName(x)));
@@ -57,7 +56,6 @@ namespace FolderMonitor
         public string Name { get; set; }
         public string Path { get; set; }
         public ErrorState ErrorState { get; }
-        public int PollInterval { get; }
         public ObservableCollection<string> Contents { get; set; } = new ObservableCollection<string>();
 
         public event PropertyChangedEventHandler PropertyChanged

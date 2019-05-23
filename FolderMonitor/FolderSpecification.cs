@@ -12,6 +12,5 @@ namespace FolderMonitor
         public string Path { get; set; }
         public ErrorState ErrorState { get; set; }
         public int? MaxFileAgeInDays { get; set; }
-        public int? PollInterval { get; set; }
     }
 }

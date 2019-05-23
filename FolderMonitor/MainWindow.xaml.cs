@@ -26,13 +26,16 @@ namespace FolderMonitor
 
             var vm = new MainViewModel();
 
-            var folders = new List<Folder>();
-            folders.Add(new Folder("Watch", @"C:\Rexson\BusinessLink\Watch", ErrorState.None, 5));
-            folders.Add(new Folder("Error", @"C:\Rexson\BusinessLink\Error", ErrorState.Any, 1));
-            folders.Add(new Folder("Processed", @"C:\Rexson\BusinessLink\Processed", ErrorState.None, 5));
+            var pl = new ProfileLoader();
+            pl.LoadProfiles().ToViewModels().ToList().ForEach(x => vm.Profiles.Add(x));
 
-            vm.Profiles.Add(new ProfileViewModel { ProfileName = "BusinessLink", Folders = new System.Collections.ObjectModel.ObservableCollection<Folder>(folders) });
-            vm.Profiles.Add(new ProfileViewModel { ProfileName = "BusinessLink1", Folders = new System.Collections.ObjectModel.ObservableCollection<Folder>(folders) });
+            //var folders = new List<Folder>();
+            //folders.Add(new Folder("Watch", @"C:\Rexson\BusinessLink\Watch", ErrorState.None));
+            //folders.Add(new Folder("Error", @"C:\Rexson\BusinessLink\Error", ErrorState.Any));
+            //folders.Add(new Folder("Processed", @"C:\Rexson\BusinessLink\Processed", ErrorState.None));
+
+            //vm.Profiles.Add(new ProfileViewModel { ProfileName = "BusinessLink", Folders = new System.Collections.ObjectModel.ObservableCollection<Folder>(folders) });
+            //vm.Profiles.Add(new ProfileViewModel { ProfileName = "BusinessLink1", Folders = new System.Collections.ObjectModel.ObservableCollection<Folder>(folders) });
 
             this.DataContext = vm;
         }

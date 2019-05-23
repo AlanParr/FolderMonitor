@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FolderMonitor"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1000">
+        Title="Folder Monitor" Height="600" Width="1000">
 
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.ColumnDefinitions>
@@ -15,7 +15,7 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        <TabControl ItemsSource="{Binding Path=Profiles}" Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch" Margin="5">
+        <TabControl ItemsSource="{Binding Path=Profiles}" Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch" Margin="5" SelectedIndex="0">
 
             <TabControl.ItemTemplate>
                 <DataTemplate>
